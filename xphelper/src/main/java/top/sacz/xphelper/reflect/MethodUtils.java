@@ -83,7 +83,7 @@ public class MethodUtils extends BaseFinder<Method> {
         result.addAll(Arrays.asList(methods));
         result.removeIf(method -> methodName != null && !method.getName().equals(methodName));
         result.removeIf(method -> returnType != null && !CheckClassType.checkType(method.getReturnType(), returnType, matchParentClass));
-        result.removeIf(method -> paramCount != null && method.getParameterCount() != paramCount);
+        result.removeIf(method -> paramCount != null && method.getParameterTypes().length != paramCount);
         result.removeIf(method -> methodParams != null && !paramEquals(method.getParameterTypes()));
         writeToMethodCache(result);
         return this;

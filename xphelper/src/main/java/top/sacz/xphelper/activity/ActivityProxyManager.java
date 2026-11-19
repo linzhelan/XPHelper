@@ -111,7 +111,7 @@ public class ActivityProxyManager {
         Field fInstrumentation = activityThread.getClass().getDeclaredField("mInstrumentation");
         fInstrumentation.setAccessible(true);
         Instrumentation mInstrumentation = (Instrumentation) fInstrumentation.get(activityThread);
-        fInstrumentation.set(activityThread, new ProxyInstrumentation(mInstrumentation));
+        fInstrumentation.set(activityThread, ProxyInstrumentation.create(mInstrumentation));
     }
 
     private static void replaceHandler(Object activityThread) throws Exception {

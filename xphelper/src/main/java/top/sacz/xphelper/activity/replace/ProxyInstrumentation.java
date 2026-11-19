@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
@@ -17,13 +18,22 @@ import android.os.TestLooperManager;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import androidx.annotation.RequiresApi;
+
 import top.sacz.xphelper.XpHelper;
 import top.sacz.xphelper.activity.ActivityProxyManager;
 import top.sacz.xphelper.reflect.ClassUtils;
 
 
 public class ProxyInstrumentation extends Instrumentation {
-    private final Instrumentation mBase;
+    final Instrumentation mBase;
+
+    public static ProxyInstrumentation create(Instrumentation base) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            return new Api26(base);
+        }
+        return new ProxyInstrumentation(base);
+    }
 
     public ProxyInstrumentation(Instrumentation mInstrumentation) {
         mBase = mInstrumentation;
@@ -67,6 +77,7 @@ public class ProxyInstrumentation extends Instrumentation {
     }
 
     @Override
+    @RequiresApi(26)
     public void addResults(Bundle results) {
         mBase.addResults(results);
     }
@@ -112,6 +123,7 @@ public class ProxyInstrumentation extends Instrumentation {
     }
 
     @Override
+    @RequiresApi(26)
     public String getProcessName() {
         return mBase.getProcessName();
     }
@@ -157,6 +169,7 @@ public class ProxyInstrumentation extends Instrumentation {
     }
 
     @Override
+    @RequiresApi(28)
     public Activity startActivitySync(Intent intent, Bundle options) {
         return mBase.startActivitySync(intent, options);
     }
@@ -345,6 +358,7 @@ public class ProxyInstrumentation extends Instrumentation {
     }
 
     @Override
+    @RequiresApi(30)
     public void callActivityOnPictureInPictureRequested(Activity activity) {
         mBase.callActivityOnPictureInPictureRequested(activity);
     }
@@ -381,9 +395,16 @@ public class ProxyInstrumentation extends Instrumentation {
         return mBase.getUiAutomation(flags);
     }
 
-    @Override
-    public TestLooperManager acquireLooperManager(Looper looper) {
-        return mBase.acquireLooperManager(looper);
+    @RequiresApi(26)
+    private static final class Api26 extends ProxyInstrumentation {
+        Api26(Instrumentation base) {
+            super(base);
+        }
+
+        @Override
+        public TestLooperManager acquireLooperManager(Looper looper) {
+            return mBase.acquireLooperManager(looper);
+        }
     }
 
 }

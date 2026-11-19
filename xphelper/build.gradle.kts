@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "top.sacz.xphelper"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
-        minSdk = 27
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

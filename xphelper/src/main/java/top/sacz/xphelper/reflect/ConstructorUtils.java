@@ -68,7 +68,7 @@ public class ConstructorUtils extends BaseFinder<Constructor<?>> {
         }
         Constructor<?>[] constructors = getDeclaringClass().getDeclaredConstructors();
         result.addAll(Arrays.asList(constructors));
-        result.removeIf(constructor -> paramCount != 0 && constructor.getParameterCount() != paramCount);
+        result.removeIf(constructor -> paramCount != 0 && constructor.getParameterTypes().length != paramCount);
         result.removeIf(constructor -> paramTypes != null && !paramEquals(constructor.getParameterTypes()));
         writeToConstructorCache(result);
         return null;
