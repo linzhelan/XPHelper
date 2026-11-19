@@ -1,6 +1,6 @@
 # XPHelper
 
-[![JitPack](https://jitpack.io/v/suzhelan/XpHelper.svg)](https://jitpack.io/#suzhelan/XpHelper)
+[![JitPack](https://jitpack.io/v/linzhelan/XpHelper.svg)](https://jitpack.io/#linzhelan/XpHelper)
 
 用于开发 Android Xposed 模块，提供反射工具、DexKit 查询与缓存、模块 Activity 与资源加载，以及基于 FastKV
 的配置存储。
@@ -25,11 +25,11 @@ maven { url = uri("https://api.xposed.info/") }
 在模块的 `build.gradle.kts` 中加入依赖，并将 `<version>` 替换为 JitPack 上可用的版本。本仓库内可使用
 `implementation(project(":xphelper"))`。使用 `BaseActivity` 时在模块中引入 AndroidX AppCompat，使用
 `BaseComposeActivity` 时引入 AndroidX Activity 与所需的 Compose
-依赖。[JitPack 版本列表](https://jitpack.io/#suzhelan/XpHelper)
+依赖。[JitPack 版本列表](https://jitpack.io/#linzhelan/XpHelper)
 
 ```kotlin
 dependencies {
-    implementation("com.github.suzhelan:XpHelper:<version>")
+    implementation("com.github.linzhelan:XpHelper:<version>")
     compileOnly("de.robv.android.xposed:api:82")
 }
 ```
@@ -674,4 +674,4 @@ Instrumentation。它的公开方法沿用 Android Instrumentation 的参数。
 
 ## 参考
 
-[项目 Wiki](https://github.com/suzhelan/XPHelper/wiki) · [EzXHelper](https://github.com/KyuubiRan/EzXHelper) · [DexKit](https://github.com/LuckyPray/DexKit) · [FastKV](https://github.com/BillyWei01/FastKV) · [提交问题](https://github.com/suzhelan/XPHelper/issues)
+[项目 Wiki](https://github.com/linzhelan/XPHelper/wiki) · [EzXHelper](https://github.com/KyuubiRan/EzXHelper) · [DexKit](https://github.com/LuckyPray/DexKit) · [FastKV](https://github.com/BillyWei01/FastKV) · [提交问题](https://github.com/linzhelan/XPHelper/issues)
